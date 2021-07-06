@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
     use HasFactory;
-    protected $table ='project';
+    protected $table ='ex_project';
     public $timestamps = true;
     protected $fillable= [
         'company_id',

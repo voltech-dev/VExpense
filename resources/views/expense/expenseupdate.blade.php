@@ -108,7 +108,7 @@
                                     </div>
                                     <label class="col-sm-3 col-form-label col-form-label-sm">Expense Date</label>
                                     <div class="col-sm-3">
-                                        <input type="date" class="form-control form-control-sm" value="{{$expense->expense_date}}" name="expense_date"
+                                        <input type="text" class="form-control form-control-sm" value="{{$expense->expense_date}}" name="expense_date"
                                                 id="expense_date" placeholder="Enter Expense Date">
                                     </div>
                                 </div>

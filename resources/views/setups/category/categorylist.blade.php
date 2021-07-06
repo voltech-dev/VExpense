@@ -50,7 +50,7 @@
                                 </td>
                                 
                                    <td>
-                                                <form action="#" method="POST">
+                                                <form action="{{ url('categorydelete',$category_record->id) }}" method="POST">
                                                   
                                                     <a class="btn btn-primary"
                                                         href="{{ url('categoryedit',$category_record->id) }}">Edit</a>
@@ -59,7 +59,7 @@
 													
 													
                                                     <button type="submit" onclick="return confirm('Are you sure want to delete?')"
-													href="{{ url('categorydelete',$category_record->id) }}" class="btn btn-danger">Delete</button>
+													href="" class="btn btn-danger">Delete</button>
                                                 </form>
                                             </td>
                                 @endforeach

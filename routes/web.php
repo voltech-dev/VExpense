@@ -9,7 +9,7 @@ use App\Http\Controllers\ExpenseController;
 /*use App\Http\Controllers\MyController;*/
 /* end of import & export controller */
 Route::get('logout', function() {
-     $exitCode = Artisan::call('cache:clear');
+   //  $exitCode = Artisan::call('cache:clear');
     // return what you want
 });
 

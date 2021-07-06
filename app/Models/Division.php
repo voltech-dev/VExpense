@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Division extends Model
 {
     use HasFactory;
-    protected $table ='division';
+    protected $table ='ex_division';
     public $timestamps = true;
     protected $fillable= [
         'company_id',

@@ -53,14 +53,14 @@
                                 <td><a href="{{ url('/countryedit',$country_data->id) }}">{{ $country_data->country_name }}</a>
                                 </td>
                                 <td>
-                                  <form action="#" method="POST">
+                                  <form action="{{ url('countrydelete',$country_data->id) }}" method="POST">
                                                   
                                                     <a class="btn btn-primary"
                                                         href="{{ url('countryedit',$country_data->id) }}">Edit</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" onclick="return confirm('Are you sure want to delete?')"
-													href="{{ url('countrydelete',$country_data->id) }}"class="btn btn-danger">Delete</button>
+													href=""class="btn btn-danger">Delete</button>
                                                 </form>
                                 </td>
                                 @endforeach

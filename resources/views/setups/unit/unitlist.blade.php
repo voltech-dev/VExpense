@@ -53,14 +53,14 @@
                                     <td>{{$unit_record->company_name}}</td>
 									<td>{{$unit_record->unit_name}}</td>
                                  <td>
-                                                <form action="#" method="POST">
+                                                <form action="{{ url('delete-unit',$unit_record->id) }}" method="POST">
                                                   
                                                     <a class="btn btn-primary"
                                                         href="{{ url('unitedit',$unit_record->id) }}">Edit</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" onclick="return confirm('Are you sure want to delete?')"
-													href="{{ url('delete-unit',$unit_record->id) }}"class="btn btn-danger">Delete</button>
+													href=""class="btn btn-danger">Delete</button>
                                                 </form>
                                             </td>
                             </tr>

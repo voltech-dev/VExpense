@@ -63,14 +63,15 @@
                                         <td>{{$expense->category_name}}</td>
                                         <td>{{$expense->expense_amount}}</td>
                                  <td>
-                                                <form action="#" method="POST">
-                                                  
-                                                    <a class="btn btn-primary"
+                                  
+														<form action="{{ url('delete-expense',$expense->id) }}" method="POST">
+                                                     <a class="btn btn-primary"
                                                         href="{{ url('expenseedit',$expense->id) }}">Edit</a>
-                                                    @csrf
+													
+													@csrf
                                                     @method('DELETE')
-                                                    <button type="submit" onclick="return confirm(Are you sure want to delete?)"
-													href="{{ url('delete-expense',$expense->id) }}"	class="btn btn-danger">Delete</button>
+                                                    <button type="submit" onclick="return confirm('Are you sure want to delete?')"
+													href=""	class="btn btn-danger">Delete</button>
                                                 </form>
                                             </td>
                             </tr>

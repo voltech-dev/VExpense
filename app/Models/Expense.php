@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Expense extends Model
 {
     use HasFactory;
-    protected $table ='expense';
+    protected $table ='ex_expense';
     public $timestamps = true;
     protected $fillable= [
         'company_id',
@@ -17,7 +17,7 @@ class Expense extends Model
         'customer_id',
         'project_id',
         'expense_date',
-        'expense_name',
+        'category_id',
         'expense_amount',
         'created_at'
     ];

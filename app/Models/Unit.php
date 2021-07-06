@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Unit extends Model
 {
     use HasFactory;
-    protected $table= 'unit';
+    protected $table= 'ex_unit';
     public $timestamps = true;
     protected $fillable= [
         'company_id',

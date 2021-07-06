@@ -26,7 +26,7 @@ class SetupController extends Controller
     public function category_store(Request $request){
        
             $request->validate([
-                'category_name' => 'required|unique:category,category_name'
+                'category_name' => 'required|unique:ex_category,category_name'
             ]);
          
             Category::create($request->all());
@@ -40,7 +40,7 @@ class SetupController extends Controller
     }
     public function category_update(Request $request,$id){
         $request->validate([
-            'category_name' => "required|unique:category,category_name,$id"
+            'category_name' => "required|unique:ex_category,category_name,$id"
         ]);
        
         $update_category = Category::find($id);
@@ -54,8 +54,9 @@ class SetupController extends Controller
         $category_destroy->delete();
         return redirect('categorylist');
     }
+    //####################Category CRUD###################################################################################
 
- //####################Company CRUD###################################################################################
+    //####################Company CRUD###################################################################################
     public function company_list(){
         $company_data = Company::all();
         return view('setups.company.companylist',compact('company_data'));
@@ -67,7 +68,7 @@ class SetupController extends Controller
     public function company_store(Request $request){
        
             $request->validate([
-                'company_name' => 'required|unique:company,company_name'
+                'company_name' => 'required|unique:ex_company,company_name'
             ]);
          
             Company::create($request->all());
@@ -80,29 +81,30 @@ class SetupController extends Controller
         return view('setups.company.companyupdate',compact('company_edit'));
     }
     public function company_update(Request $request,$id){
-        $request->validate([
-            'company_name' => "required|unique:company,company_name,$id"
-        ]);
-       
-        $update_company = Company::find($id);
-        $update_company->company_name = $request->get('company_name');
-        $update_company->update();
-        return redirect('companylist');
+            $request->validate([
+                'company_name' => "required|unique:ex_company,company_name,$id"
+            ]);
+        
+            $update_company = Company::find($id);
+            $update_company->company_name = $request->get('company_name');
+            $update_company->update();
+            return redirect('companylist');
 
     }
     public function company_destroy($id){
-        $company_destroy= Company::find($id);
-        $company_destroy->delete();
-        return redirect('companylist');
+                $company_destroy= Company::find($id);
+                $company_destroy->delete();
+                return redirect('companylist');
     }
+     //####################Company CRUD###################################################################################
 
     //####################Customer CRUD#################################################################################
 
     public function customer_list(){
-        $customer_data = Customer::join('company','customer.company_id','=','company.id')
-						->join('unit','customer.unit_id','=','unit.id')
-						->join('country','customer.country_id','=','country.id')
-						->select('company.*','unit.*','country.*','customer.*')
+        $customer_data = Customer::join('ex_company','ex_customer.company_id','=','ex_company.id')
+						->join('ex_unit','ex_customer.unit_id','=','ex_unit.id')
+						->join('ex_country','ex_customer.country_id','=','ex_country.id')
+						->select('ex_company.*','ex_unit.*','ex_country.*','ex_customer.*')
 						->get();
         return view('setups.customer.customerlist',compact('customer_data'));
     }
@@ -116,7 +118,7 @@ class SetupController extends Controller
 
     public function customer_store(Request $customer_rec){
         $customer_rec->validate([
-                    'customer_name' => 'required|unique:customer,customer_name'
+                    'customer_name' => 'required|unique:ex_customer,customer_name'
         ]);
         $customer_add = new Customer;
 		$customer_add->company_id = $customer_rec->get('company_name');
@@ -138,8 +140,8 @@ class SetupController extends Controller
     public function customer_update(Request $update, $id){
         
         $update->validate([
-            'customer_name' => "required|unique:customer,customer_name,$id"
-]);
+            'customer_name' => "required|unique:ex_customer,customer_name,$id"
+            ]);
         $customer_update = Customer::where('id','=',$id)->first();
 
 		$customer_update->company_id = $update->get('company_name');
@@ -156,11 +158,13 @@ class SetupController extends Controller
         $destroy_customer->delete();
         return redirect('customerlist');
     }
+    //####################Customer CRUD#################################################################################
+
     //####################Unit CRUD###################################################################################
 
     public function unit_list(){
-        $unit_data = Unit::join('company','unit.company_id','=','company.id')
-                    ->select('company.*','unit.*')
+        $unit_data = Unit::join('ex_company','ex_unit.company_id','=','ex_company.id')
+                    ->select('ex_company.*','ex_unit.*')
                     ->get();
         return view('setups.unit.unitlist',compact('unit_data'));
     }
@@ -171,7 +175,7 @@ class SetupController extends Controller
     }
     public function unit_store(Request $request){
         $request->validate([
-            'unit_name' => 'required|unique:unit,unit_name'
+            'unit_name' => 'required|unique:ex_unit,unit_name'
                
         ]);
         $unit = new Unit;
@@ -189,7 +193,7 @@ class SetupController extends Controller
 
     public function unit_update(Request $request, $id){
         $request->validate([
-            'unit_name' => "required|unique:unit,unit_name,$id"
+            'unit_name' => "required|unique:ex_unit,unit_name,$id"
                
         ]);
         $unit = Unit::where('id','=',$id)->first();
@@ -203,13 +207,15 @@ class SetupController extends Controller
         $destroy->delete();
         return redirect('unitlist');
     }
+    //####################Unit CRUD###################################################################################
 
-     //####################Division CRUD###################################################################################
+
+    //####################Division CRUD###################################################################################
      
      public function division_list(){
-         $division_data= Division::join('company','division.company_id','=','company.id')
-                        ->join('unit','division.unit_id','=','unit.id')
-                        ->select('company.*','unit.*','division.*')
+         $division_data= Division::join('ex_company','ex_division.company_id','=','ex_company.id')
+                        ->join('ex_unit','ex_division.unit_id','=','ex_unit.id')
+                        ->select('ex_company.*','ex_unit.*','ex_division.*')
                         ->get();
          return view('setups.division.divisionlist',compact('division_data'));
 
@@ -224,8 +230,8 @@ class SetupController extends Controller
      public function division_store(Request $division){
             $division->validate([
              
-                'division_name' => 'required|unique:division,division_name',
-                'division_code' => 'required|unique:division,division_code'
+                'division_name' => 'required|unique:ex_division,division_name',
+                'division_code' => 'required|unique:ex_division,division_code'
             ]);    
 
            $div = new Division;
@@ -249,8 +255,8 @@ class SetupController extends Controller
 
         $request->validate([
               
-            'division_name' => "required|unique:division,division_name,$id",
-            'division_code' => "required|unique:division,division_code,$id"
+            'division_name' => "required|unique:ex_division,division_name,$id",
+            'division_code' => "required|unique:ex_division,division_code,$id"
         ]); 
             $division_update = Division::where('id','=',$id)->first();
             $division_update->company_id = $request->get('company_name');
@@ -266,13 +272,14 @@ class SetupController extends Controller
          $destroy_division->delete();
          return redirect('divisionlist');
      }
+      //####################Division CRUD###################################################################################
 
-     //############Country CRUD #################################################################################
+     //############Country CRUD ########################################################################################
 
      public function country_list(){
-        $country_data = Country::join('company','country.company_id','=','company.id')
-						->join('unit','country.unit_id','=','unit.id')
-						->select('company.*','unit.*','country.*')
+        $country_data = Country::join('ex_company','ex_country.company_id','=','ex_company.id')
+						->join('ex_unit','ex_country.unit_id','=','ex_unit.id')
+						->select('ex_company.*','ex_unit.*','ex_country.*')
 						->get();
 
         // print_r($country_data);
@@ -288,7 +295,7 @@ class SetupController extends Controller
     public function country_store(Request $request){
        
             $request->validate([
-                'country_name' => 'required|unique:country,country_name'
+                'country_name' => 'required|unique:ex_country,country_name'
             ]);
 			$country_save=new Country;
 			$country_save->company_id = $request->get('company_name');
@@ -307,7 +314,7 @@ class SetupController extends Controller
     }
     public function country_update(Request $request,$id){
         $request->validate([
-            'country_name' => "required|unique:country,country_name,$id"
+            'country_name' => "required|unique:ex_country,country_name,$id"
         ]);
        
         $update_country = Country::where('id','=',$id)->first();
@@ -323,15 +330,15 @@ class SetupController extends Controller
         $country_destroy->delete();
         return redirect('countrylist');
     }
-
+    //############Country CRUD ##########################################################################################
 
     //####################Project CRUD###################################################################################
     public function project_list(){
-        $project_data = Project::join('company','project.company_id','=','company.id')
-                      ->join('unit', 'project.unit_id','=','unit.id')
-                      ->join('country','project.country_id','=','country.id')
-                      ->join('customer','project.customer_id','=','customer.id')
-                      ->select('company.*','unit.*','country.*','customer.*','project.*')
+        $project_data = Project::join('ex_company','ex_project.company_id','=','ex_company.id')
+                      ->join('ex_unit', 'ex_project.unit_id','=','ex_unit.id')
+                      ->join('ex_country','ex_project.country_id','=','ex_country.id')
+                      ->join('ex_customer','ex_project.customer_id','=','ex_customer.id')
+                      ->select('ex_company.*','ex_unit.*','ex_country.*','ex_customer.*','ex_project.*')
                       ->get();
         return view('setups.project.projectlist',compact('project_data'));
     }
@@ -346,8 +353,8 @@ class SetupController extends Controller
     public function project_store(Request $request){
        
             $request->validate([
-                'project_name' => 'required|unique:project,project_name',
-                'project_code' => 'required|unique:project,project_code',
+                'project_name' => 'required|unique:ex_project,project_name',
+                'project_code' => 'required|unique:ex_project,project_code',
                 'project_start_date' =>'required'
 				
             ]);
@@ -376,8 +383,8 @@ class SetupController extends Controller
     }
     public function project_update(Request $request,$id){
          $request->validate([
-                'project_name' => "required|unique:project,project_name,$id",
-                'project_code' => "required|unique:project,project_code,$id",
+                'project_name' => "required|unique:ex_project,project_name,$id",
+                'project_code' => "required|unique:ex_project,project_code,$id",
                 'project_end_date' =>'required'
 				
             ]);
@@ -400,4 +407,5 @@ class SetupController extends Controller
         $project_destroy->delete();
         return redirect('projectlist');
     }
+  //###############Project CRUD######################################################################################  
 }

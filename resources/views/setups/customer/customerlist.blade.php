@@ -55,14 +55,14 @@
                                 <td><a href="{{ url('/customeredit',$customer_record->id) }}">{{ $customer_record->customer_name }}</a>
                                 </td>
                                 <td>
-                                 <form action="#" method="POST">
+                                 <form action="{{ url('delete-customer',$customer_record->id) }}" method="POST">
                                                   
                                                     <a class="btn btn-primary"
                                                         href="{{ url('customeredit',$customer_record->id) }}">Edit</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" onclick="return confirm('Are you sure want to delete?')"
-													href="{{ url('delete-customer',$customer_record->id) }}"class="btn btn-danger">Delete</button>
+													href=""class="btn btn-danger">Delete</button>
                                                 </form>
                                 </td>
                                 @endforeach
