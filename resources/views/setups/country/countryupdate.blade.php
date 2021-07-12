@@ -48,8 +48,9 @@
                       <div class="form-group row">
                                     <label class="col-sm-3 col-form-label col-form-label-sm">Company</label>
                                     <div class="col-sm-3">
-                                        <select class="form-control-md" name="company_name" id="company_name">
-                                                    <option selected disable>---Select---</option>
+                                        <select class="form-control form-control-sm" name="company_name" id="company_name_id">
+                                                    {{-- <option value="{{$country->id}}" selected>{{$country->country_name}}</option> --}}
+                                                    <option disabled>---Select---</option>
                                                      @foreach($company as $company)
                                                     <option value="{{$company->id}}"
 														{{$company->id == $country->company_id ? 'selected' : ''}}>
@@ -59,12 +60,13 @@
                                     </div>
                                     <label class="col-sm-3 col-form-label col-form-label-sm">Unit</label>
                                     <div class="col-sm-3">
-                                        <select class="form-control-md" name="unit_name" id="unit_name">
-                                                    <option selected disable>---Select---</option>
-                                                     @foreach($unit as $unit)
-                                                    <option value="{{$unit->id}}"
-													{{$unit->id == $country->unit_id ? 'selected' : ''}}>
-													{{$unit->unit_name}}</option>
+                                        <select class="form-control form-control-sm" name="unit_name" id="unit_name_id">
+                                            <option selected></option>
+                                                    <option disabled>---Select---</option>
+                                                     @foreach($unit as $units)
+                                                    <option value="{{$units->id}}"
+													{{$units->id == $country->unit_id ? 'selected' : ''}}>
+													{{$units->unit_name}}</option>
                                                     @endforeach
                                                 </select>
                                     </div>
@@ -73,7 +75,7 @@
                                     <label class="col-sm-3 col-form-label col-form-label-sm">Country </label>
                                     <div class="col-sm-3">
                                        <input type="text" class="form-control form-control-sm" name="country_name"
-                                                id="country_name" value="{{$country->country_name}}" placeholder="Enter Country Name">
+                                                id="country_name" autocomplete="off" value="{{$country->country_name}}" placeholder="Enter Country Name">
                                     </div>
                             <div class="col-sm-3">
                                 <button type="submit" name="submit" id="submit"
@@ -90,4 +92,36 @@
     </div>
 </div>
 @endsection
+{{-- This Ajax for interlinking  all the Set-up's --}}
+@push('scripts')
+<script type="text/javascript">
+$(document).ready(function(){   
+     //alert("hiii");
+    
+    $('#company_name_id').change(function(event){
+        var company_name =$("#company_name_id").val();
+         //alert(company_name);
 
+       $.ajax({
+            url : "{{url('/companydisplay')}}",
+            type: 'GET',
+            data : {
+                company : company_name
+            },
+            //console.log(data);
+           // datatype : 'json',
+            success : function(data){
+              //  console.log(data);
+                $('#unit_name_id').html(data);
+                
+            },
+            error: function(exception){
+                alert('error');
+            }
+        });
+        });
+    });
+ //});
+
+</script>
+@endpush

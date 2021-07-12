@@ -8,7 +8,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="#"></a>
+                    <a href="{{url('/dashboard')}}"></a>
                 </li>
                 <li class="breadcrumb-item">
                     <a href="{{url('unitlist')}}">Unit List</a>
@@ -25,7 +25,7 @@
 
 @if ($errors->any())
 <div class="alert alert-danger">
-    <strong>Whoops!</strong> There were some problems with your input.<br><br>
+    {{-- <strong>Whoops!</strong> There were some problems with your input.<br><br> --}}
     <ul>
         @foreach ($errors->all() as $error)
         <li>{{ $error }}</li>
@@ -47,7 +47,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label col-form-label-sm">Company</label>
                                     <div class="col-sm-3">
-                                        <select class="form-control-md" name="company_name" id="company_name">
+                                        <select class="form-control form-control-sm" name="company_name" id="company_name_id" autofocus>
                                                     <option selected disable>---Select---</option>
                                                      @foreach($company as $company)
                                                     <option value="{{$company->id}}">{{$company->company_name}}</option>
@@ -57,7 +57,7 @@
                                     <label class="col-sm-3 col-form-label col-form-label-sm">Unit</label>
                                     <div class="col-sm-3">
                                         <input type="text" class="form-control form-control-sm" name="unit_name"
-                                                id="unit_name" placeholder="Enter Unit Name">
+                                                id="unit_name_id" autocomplete="off" placeholder="Enter Unit Name" autofocus>
                                     </div>
                                 </div>
                             
@@ -78,7 +78,6 @@
     </div>
 </div>
 </div>
-
 
 @endsection
 

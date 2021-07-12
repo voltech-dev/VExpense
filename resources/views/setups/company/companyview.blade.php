@@ -3,13 +3,16 @@
 <!-- begin::page-header -->
 <div class="page-header">
     <div class="container-fluid d-sm-flex justify-content-between">
-        <h4>Category</h4>
+        <h4>Company </h4>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="{{url('categorylist')}}">Category</a>
+                    <a href="#">Setup</a>
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">Create</li>
+                <li class="breadcrumb-item">
+                    <a href="{{url('companylist')}}">Company</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Edit</li>
             </ol>
         </nav>
     </div>
@@ -24,7 +27,6 @@
     <p>{{ $message }}</p>
 </div>
 @endif
-
 @if($errors->any())
 	<div class="alert alert-danger">
 		<ul>
@@ -39,22 +41,20 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <form action="{{ url('/save-category')}}" method="POST">
+                    <form action="#" method="GET">
                         @csrf
-
+					
                         {{ csrf_field() }}
 
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label col-form-label-sm">Create New Category</label>
+                            <label class="col-sm-3 col-form-label col-form-label-sm">Company Name</label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control form-control-sm" name="category_name"
-                                    id="id_category_name" autocomplete="off" placeholder="Enter Category Name" />
+                                <input type="text" class="form-control form-control-sm" name="company_name"
+                                    id="company_name" value="{{$company_view->company_name}}" readonly />
                             </div>
                             <div class="col-sm-3">
-                                <button type="submit" name="submit" id="submit"
-                                    class="btn btn-success btn-square btn-sm">Add
-                                    </button>
-									<a class="btn btn-primary btn-sm btn-square" href="{{ url('categorylist') }}">
+                                
+									<a class="btn btn-primary btn-sm btn-square" href="{{ url('companylist') }}">
                                 Back</a>
                             </div>
                         </div>
@@ -65,3 +65,4 @@
     </div>
 </div>
 @endsection
+

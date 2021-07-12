@@ -50,7 +50,7 @@
                             <label class="col-sm-3 col-form-label col-form-label-sm">Company Name</label>
                             <div class="col-sm-6">
                                 <input type="text" class="form-control form-control-sm" name="company_name"
-                                    id="company_name" value="{{$company_edit->company_name}}" placeholder="Enter the Company Name" />
+                                    id="company_name" autocomplete="off" value="{{$company_edit->company_name}}" placeholder="Enter the Company Name" autofocus/>
                             </div>
                             <div class="col-sm-3">
                                 <button type="submit" name="submit" id="submit"

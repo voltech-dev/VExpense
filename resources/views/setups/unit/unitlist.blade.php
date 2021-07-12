@@ -5,14 +5,14 @@
     <div class="container-fluid d-sm-flex justify-content-between">
         <h4>Unit List</h4>
         <div class="pull-right">
-            <a class="btn btn-success btn-square btn-sm" href="{{ url('unitcreate') }}"> New Unit</a>
+            <a class="btn btn-success btn-square btn-sm" href="{{ url('unitcreate') }}">Add New Unit</a>
         </div>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
                     <a href="#">Unit</a>
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">Unit List</li>
+                <li class="breadcrumb-item active" aria-current="page"> Unit List</li>
             </ol>
         </nav>
     </div>
@@ -34,9 +34,8 @@
                 <div class="card-body">
                     <table id="myTable" class="table table-striped table-bordered dataTable dtr-inline" style="font-family: Inter,sans-serif; font-size: .835rem;">
                         <thead>
-                            <tr >
-                               
-									<th>S.No</th>
+                            <tr>
+                                	<th>S.No</th>
 									<th>Company Name</th>
 									<th>Unit Name</th>
                                     <th>Action</th>
@@ -47,22 +46,22 @@
 							$i=0;
 						@endphp
                             @foreach( $unit_data as $unit_record)
-                            <tr >
-                             
+                            <tr>
 									<td>{{++$i}}</td>
                                     <td>{{$unit_record->company_name}}</td>
 									<td>{{$unit_record->unit_name}}</td>
                                  <td>
-                                                <form action="{{ url('delete-unit',$unit_record->id) }}" method="POST">
-                                                  
-                                                    <a class="btn btn-primary"
-                                                        href="{{ url('unitedit',$unit_record->id) }}">Edit</a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" onclick="return confirm('Are you sure want to delete?')"
-													href=""class="btn btn-danger">Delete</button>
-                                                </form>
-                                            </td>
+                                        <form action="{{ url('delete-unit',$unit_record->id) }}" method="POST">
+                                            <a class="btn btn-outline-primary"
+                                                        href="{{ url('unitshow',$unit_record->id) }}"><small><i class="fas fa-eye"></i></small></a>
+                                             <a class="btn btn-outline-primary"
+                                                        href="{{ url('unitedit',$unit_record->id) }}"><small><i class="fas fa-edit"></i></small></a>
+                                         @csrf
+                                        @method('DELETE')
+                                            <button type="submit" onclick="return confirm('Are you sure want to delete?')"
+													href=""class="btn btn-outline-danger"><small><i class="fas fa-trash"></i></small></button>
+                                        </form>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

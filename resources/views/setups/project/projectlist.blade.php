@@ -5,7 +5,7 @@
     <div class="container-fluid d-sm-flex justify-content-between">
         <h4>Project List</h4>
         <div class="pull-right">
-            <a class="btn btn-success btn-square btn-sm" href="{{ url('projectcreate') }}"> New Project</a>
+            <a class="btn btn-success btn-square btn-sm" href="{{ url('projectcreate') }}">Add New Project</a>
         </div>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -60,19 +60,21 @@
 									<td>{{$projectrecord->unit_name}}</td>
 									<td>{{$projectrecord->country_name}}</td>
 									<td>{{$projectrecord->customer_name}}</td>
-                                     <td>{{$projectrecord->project_name}}</td>
+                                    <td>{{$projectrecord->project_name}}</td>
 									<td>{{$projectrecord->project_code}}</td>
 									<td>{{$projectrecord->project_start_date}}</td>
 									<td>{{$projectrecord->project_end_date}}</td>
                                  <td>
+                                    <a class="btn btn-outline-primary"
+                                    href="{{ url('projectshow',$projectrecord->id) }}"><small><i class="fas fa-eye"></i></small></a>
+                                    <a class="btn btn-outline-primary"
+                                    href="{{ url('projectedit',$projectrecord->id) }}"><small><i class="fas fa-edit"></i></small></a>
                                                 <form action="{{ url('projectdelete',$projectrecord->id) }}" method="POST">
-                                                  
-                                                    <a class="btn btn-primary"
-                                                        href="{{ url('projectedit',$projectrecord->id) }}">Edit</a>
+                                                    
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit"onclick="return confirm('Are you sure want to delete?')"
-													href="" class="btn btn-danger">Delete</button>
+													href="" class="btn btn-outline-danger"><small><i class="fas fa-trash"></i></small></button>
                                                 </form>
                                             </td>
                             </tr>

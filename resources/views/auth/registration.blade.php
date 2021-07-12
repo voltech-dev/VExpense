@@ -16,9 +16,13 @@
     <link rel="stylesheet" href="{{ asset('css/app.min.css') }}" type="text/css">
 </head>
 <style>
+    .alert{
+        color:crimson;
+        
+    }
     .img{
         background-image : url("expense1.jpg");
-        min-height: 300%;
+        min-height: 380px;
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
@@ -48,17 +52,34 @@
     </div>
     <!-- ./ logo -->
 
-    <h3>Sign in</h3>
+    <h3>Register</h3>
     <hr>
+    @if ($errors->any)
+    <div class="alert ">
+        {{-- <strong>Whoops!</strong> There were some problems with your input.<br>       --}}
+        <ul>
+            @foreach ($errors->all() as $error)
+               <li>{{$error}}</li> 
+            @endforeach
+        </ul>
+    </div>
+    
+    @endif
     <!-- form -->
-     <form method="POST" action="{{ route('login') }}">
+     <form method="POST" action="{{ url('/registrationsave') }}">
             @csrf
 
         <div class="form-group row">
-            <label  class="col-sm-3 col-form-label col-form-label-sm">Email</label>
+            <label  class="col-sm-3 col-form-label col-form-label-sm">Username</label>
             <div class="col-sm-9">
-                <input class="form-control form-control-sm" id="colFormLabelSm" placeholder="Email ID" type="email" name="email" :value="old('email')" autocomplete="off" required autofocus>
+                <input class="form-control form-control-sm" id="colFormLabelSm" placeholder="Enter Your Name" type="text" name="name" autocomplete="off"  required autofocus>
             </div> 
+        </div>
+        <div class="form-group row">
+            <label  class="col-sm-3 col-form-label col-form-label-sm">Email ID</label>
+            <div class="col-sm-9">
+                <input class="form-control form-control-sm" id="colFormLabelSm" placeholder="Enter your Email-ID" type="email" name="email" required autocomplete="current-password">
+            </div>
         </div>
         <div class="form-group row">
             <label  class="col-sm-3 col-form-label col-form-label-sm">Password</label>
@@ -66,15 +87,8 @@
                 <input class="form-control form-control-sm" id="colFormLabelSm" placeholder="Enter your Password" type="password" name="password" required autocomplete="current-password">
             </div>
         </div>
-        <div class="form-group row d-flex justify-content-between">
-            <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" checked="" id="customCheck1">
-                <label class="custom-control-label" for="customCheck1">Remember me</label>
-            </div>
-            <a href="#">Reset password</a>
-        </div>
-        <button type="submit" class="btn btn-primary btn-square btn-block">Sign in</button><br><br>
-       <a class="btn btn-outline-primary"  href="{{ url('/registration') }}">Click To Register </a>
+        <button type="submit" class="btn btn-primary btn-square btn-block">Register</button><br>
+        {{-- <a href="{{ route('register') }}">Login </a> --}}
         
     </form>
     <!-- ./ form -->

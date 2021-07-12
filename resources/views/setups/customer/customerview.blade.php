@@ -38,54 +38,59 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <form action="{{ url('/save-customer')}}" method="POST">
+                    <form action="{{ url('/update-customer',$customer->id)}}" method="POST">
                         @csrf
+						@method('PUT')
 
                         {{ csrf_field() }}
 
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label col-form-label-sm">Company</label>
                             <div class="col-sm-3">
-							<select class="form-control form-control-sm" name="company_name" id="company_name_id" autofocus>
+							<select class="form-control form-control-sm" name="company_name" id="company_name" disabled>
                                                     <option selected disable>---Select---</option>
                                                      @foreach($company as $company)
-                                                    <option value="{{$company->id}}">{{$company->company_name}}</option>
+                                                    <option value="{{$company->id}}"
+													{{$company->id == $customer->company_id ?'selected' : ''}}>
+													{{$company->company_name}}</option>
                                                     @endforeach
                                                 </select>
                                
                             </div>
 							<label class="col-sm-3 col-form-label col-form-label-sm">Unit</label>
                                     <div class="col-sm-3">
-                                        <select class="form-control form-control-sm" name="unit_name" id="unit_name_id" autofocus>
-                                                    {{-- <option selected disable>---Select---</option>
+                                        <select class="form-control form-control-sm" name="unit_name" id="unit_name" disabled>
+                                                    <option selected disable>---Select---</option>
                                                      @foreach($unit as $unit)
-                                                    <option value="{{$unit->id}}">{{$unit->unit_name}}</option>
-                                                    @endforeach --}}
+                                                    <option value="{{$unit->id}}"
+													{{$unit->id == $customer->unit_id ?'selected' : ''}}>
+													{{$unit->unit_name}}</option>
+                                                    @endforeach
                                                 </select>
                                     </div>
 						</div>
 						<div class="form-group row">
                             <label class="col-sm-3 col-form-label col-form-label-sm">Country</label>
                             <div class="col-sm-3">
-							<select class="form-control form-control-sm" name="country_name" id="country_name_id" autofocus>
-                                                    {{-- <option selected disable>---Select---</option>
+							<select class="form-control form-control-sm" name="country_name" id="country_name" disabled>
+                                                    <option selected disable>---Select---</option>
                                                      @foreach($country as $country)
-                                                    <option value="{{$country->id}}">{{$country->country_name}}</option>
-                                                    @endforeach --}}
+                                                    <option value="{{$country->id}}"
+														{{$country->id == $customer->country_id ?'selected' : ''}}>
+														{{$country->country_name}}</option>
+                                                    @endforeach
                                                 </select>
                                
                             </div>
 							<label class="col-sm-3 col-form-label col-form-label-sm">Customer Name</label>
                                     <div class="col-sm-3">
                                         <input type="text" class="form-control form-control-sm" name="customer_name"
-                                                id="customer_name_id" autocomplete="off" placeholder="Enter Customer Name" autofocus>
+                                                id="customer_name" value="{{$customer->customer_name}}" readonly>
                                     </div>
 						</div>
 						<div class="form-group row">
                             <div class="col-sm-3">
-                                <button type="submit" name="submit" id="submit"
-                                    class="btn btn-success btn-square btn-sm">Add
-                                    </button>
+
 									<a class="btn btn-primary btn-sm btn-square" href="{{ url('customerlist') }}">
                                 Back</a>
                             </div>
@@ -97,49 +102,3 @@
     </div>
 </div>
 @endsection
-{{-- This Ajax for interlinking  all the Set-up's --}}
-@push('scripts')
-<script type ="text/javascript">
-    $(document).ready(function(){
-               $('#company_name_id').change(function(event){
-        var company_name =$("#company_name_id").val();
-         //alert(company_name);
-
-       $.ajax({
-            url : "{{url('/companydisplay')}}",
-            type: 'GET',
-            data : {
-                company : company_name
-            },
-            //console.log(data);
-           // datatype : 'json',
-            success : function(data){
-              //  console.log(data);
-                $('#unit_name_id').html(data);      
-            },
-            error: function(exception){
-                alert('error');
-            }
-        });
-        });
-
-       $('#unit_name_id').change(function(event){
-            var unit_name = $('#unit_name_id').val();
-          // alert(unit_name);
-            $.ajax({
-                url : "{{url('/unitdisplay')}}",
-                type : 'GET',
-                data : { unit_name : unit_name},
-                success : function(data){
-                    $('#country_name_id').html(data);
-                },
-                error : function(exception){
-                    alert('error');
-                }
-            });
-       });
-     
-    });
-    
-</script>
-@endpush

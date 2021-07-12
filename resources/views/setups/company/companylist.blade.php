@@ -6,7 +6,7 @@
         <div class="container-fluid d-sm-flex justify-content-between">
             <h4>Company</h4>
             <div class="pull-right">
-                <a class="btn btn-success btn-square btn-sm" href="{{ url('/companycreate') }}"> Create </a>
+                <a class="btn btn-success btn-square btn-sm" href="{{ url('/companycreate') }}"> Create New Company</a>
             </div>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
@@ -57,14 +57,16 @@
                                             
                                                 
                                               <form action="{{ url('companydelete', $companyrecord->id) }}" method="POST">
-											<a class="btn btn-primary"
-                                                    href="{{ url('companyedit', $companyrecord->id) }}">Edit</a>
+                                                <a class="btn btn-outline-info"
+                                                    href="{{ url('companyshow', $companyrecord->id) }}"><i class="fas fa-eye"></i></a>
+                                                <a class="btn btn-outline-primary"
+                                                    href="{{ url('companyedit', $companyrecord->id) }}"><i class="fas fa-edit"></i></a>
 											@csrf		
 											@method('DELETE')
                                                 <button type="submit"
                                                     onclick="return confirm('Are you sure want to delete?')"
                                                     href=""
-                                                    class="btn btn-danger">Delete</button>
+                                                    class="btn btn-outline-danger"><i class="fas fa-trash"></i></button>
                                             </form>
                                         </td>
                                 @endforeach

@@ -25,7 +25,7 @@
 
 @if ($errors->any())
 <div class="alert alert-danger">
-    {{-- <strong>Whoops!</strong> There were some problems with your input.<br><br> --}}
+    <strong>Whoops!</strong> There were some problems with your input.<br><br>
     <ul>
         @foreach ($errors->all() as $error)
         <li>{{ $error }}</li>
@@ -42,14 +42,14 @@
                     <h6 class="card-title"></h6>
                     <div class="row">
                         <div class="col-md-12">
-                            <form action="{{ url('update-unit',$unit->id) }}" method="POST">
+                            <form action="#" method="POST">
                                 @csrf
 								@method('PUT')
 								{{ csrf_field() }}
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label col-form-label-sm">Company</label>
                                     <div class="col-sm-3">
-                                        <select class="form-control form-control-sm" name="company_name" id="company_name">
+                                        <select class="form-control form-control-sm" name="company_name" id="company_name" disabled>
                                                     <option selected disable>---Select---</option>
                                                      @foreach($company as $company)
                                                     <option value="{{$company->id}}"
@@ -61,14 +61,10 @@
                                     <label class="col-sm-3 col-form-label col-form-label-sm">Unit</label>
                                     <div class="col-sm-3">
                                         <input type="text" class="form-control form-control-sm" name="unit_name" value="{{$unit->unit_name}}"
-                                                id="unit_name" autocomplete="off" placeholder="Enter Unit Name">
+                                                id="unit_name" readonly>
                                     </div>
                                 </div>
-                            
-                           
-                                <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                                    <button type="submit" class="btn btn-primary btn-sm btn-square">Submit</button>
-                                </div>
+              
                         </div>
                         </form>
                         <div class="col-xs-12 col-sm-12 col-md-12 text-right">

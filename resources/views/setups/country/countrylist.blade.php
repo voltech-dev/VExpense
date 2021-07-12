@@ -6,7 +6,7 @@
     <div class="container-fluid d-sm-flex justify-content-between">
         <h4>Country</h4>
         <div class="pull-right">
-            <a class="btn btn-success btn-square btn-sm" href="{{ url('/countrycreate') }}"> Create </a>
+            <a class="btn btn-success btn-square btn-sm" href="{{ url('/countrycreate') }}"> Add New Country </a>
         </div>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -48,22 +48,23 @@
                             @foreach( $country_data as $country_data)
                             <tr>
                                 <td>{{ $i++ }}</td>
-								 <td>{{$country_data->company_name}}</td>
+								<td>{{$country_data->company_name}}</td>
 								<td>{{$country_data->unit_name}}</td>
                                 <td><a href="{{ url('/countryedit',$country_data->id) }}">{{ $country_data->country_name }}</a>
                                 </td>
                                 <td>
-                                  <form action="{{ url('countrydelete',$country_data->id) }}" method="POST">
-                                                  
-                                                    <a class="btn btn-primary"
-                                                        href="{{ url('countryedit',$country_data->id) }}">Edit</a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" onclick="return confirm('Are you sure want to delete?')"
-													href=""class="btn btn-danger">Delete</button>
-                                                </form>
+                                    <form action="{{ url('countrydelete',$country_data->id) }}" method="POST">
+                                        <a class="btn btn-outline-info"
+                                        href="{{ url('countryshow', $country_data->id) }}"><small><i class="fas fa-eye"></i></small></a>
+                                        <a class="btn btn-outline-primary"
+                                         href="{{ url('countryedit',$country_data->id) }}"><small><i class="fas fa-edit"></i></small></a>
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" onclick="return confirm('Are you sure want to delete?')"
+										href=""class="btn btn-outline-danger"><small><i class="fas fa-trash"></i></small></button>
+                                     </form>
                                 </td>
-                                @endforeach
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

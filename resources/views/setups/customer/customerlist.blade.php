@@ -6,7 +6,7 @@
     <div class="container-fluid d-sm-flex justify-content-between">
         <h4>Customer</h4>
         <div class="pull-right">
-            <a class="btn btn-success btn-square btn-sm" href="{{ url('/customercreate') }}"> Create </a>
+            <a class="btn btn-success btn-square btn-sm" href="{{ url('/customercreate') }}"> Add New Customer </a>
         </div>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -38,9 +38,9 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-								 <th>Company  </th>
-								  <th>Unit  </th>
-								   <th>Country  </th>
+								<th>Company  </th>
+								<th>Unit  </th>
+								<th>Country  </th>
                                 <th>Customer Name </th>
                                 <th>Action</th>
                             </tr>
@@ -49,23 +49,24 @@
                             @foreach( $customer_data as $customer_record)
                             <tr>
                                 <td>{{ $i++ }}</td>
-								 <td>{{ $customer_record->company_name }}</td>
-								  <td>{{ $customer_record->unit_name }}</td>
-								   <td>{{ $customer_record->country_name }}</td>
+								<td>{{ $customer_record->company_name }}</td>
+								<td>{{ $customer_record->unit_name }}</td>
+								<td>{{ $customer_record->country_name }}</td>
                                 <td><a href="{{ url('/customeredit',$customer_record->id) }}">{{ $customer_record->customer_name }}</a>
                                 </td>
                                 <td>
-                                 <form action="{{ url('delete-customer',$customer_record->id) }}" method="POST">
-                                                  
-                                                    <a class="btn btn-primary"
-                                                        href="{{ url('customeredit',$customer_record->id) }}">Edit</a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" onclick="return confirm('Are you sure want to delete?')"
-													href=""class="btn btn-danger">Delete</button>
-                                                </form>
+                                    <form action="{{ url('delete-customer',$customer_record->id) }}" method="POST">
+                                        <a class="btn btn-outline-primary"
+                                        href="{{ url('customershow',$customer_record->id) }}"><small><i class="fas fa-eye"></i></small></a>
+                                        <a class="btn btn-outline-primary"
+                                                            href="{{ url('customeredit',$customer_record->id) }}"><small><i class="fas fa-edit"></i></small></a>
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" onclick="return confirm('Are you sure want to delete?')"
+                                        href=""class="btn btn-outline-danger"><small><i class="fas fa-trash"></i></small></button>
+                                    </form>
                                 </td>
-                                @endforeach
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

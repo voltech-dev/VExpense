@@ -6,7 +6,7 @@
     <div class="container-fluid d-sm-flex justify-content-between">
         <h4>Category</h4>
         <div class="pull-right">
-            <a class="btn btn-success btn-square btn-sm" href="{{ url('/categorycreate') }}"> Create </a>
+            <a class="btn btn-success btn-square btn-sm" href="{{ url('/categorycreate') }}"> Create New Category </a>
         </div>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -50,18 +50,17 @@
                                 </td>
                                 
                                    <td>
-                                                <form action="{{ url('categorydelete',$category_record->id) }}" method="POST">
-                                                  
-                                                    <a class="btn btn-primary"
-                                                        href="{{ url('categoryedit',$category_record->id) }}">Edit</a>
-                                                    @csrf
-                                                    @method('DELETE')
-													
-													
-                                                    <button type="submit" onclick="return confirm('Are you sure want to delete?')"
-													href="" class="btn btn-danger">Delete</button>
-                                                </form>
-                                            </td>
+                                        <form action="{{ url('categorydelete',$category_record->id) }}" method="POST">
+                                            <a class="btn btn-outline-primary"
+                                            href="{{ url('categoryshow',$category_record->id) }}"><small><i class="fas fa-eye"></i></small></a>
+                                            <a class="btn btn-outline-primary"
+                                            href="{{ url('categoryedit',$category_record->id) }}"><small><i class="fas fa-edit"></i></small></a>
+                                             @csrf
+                                            @method('DELETE')
+											<button type="submit" onclick="return confirm('Are you sure want to delete?')"
+											href="" class="btn btn-outline-danger"><small><i class="fas fa-trash"></i></small></button>
+                                        </form>
+                                    </td>
                                 @endforeach
                         </tbody>
                     </table>

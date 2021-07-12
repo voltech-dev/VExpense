@@ -21,6 +21,7 @@
 </head>
 
 <body>
+    {{-- <img src="{{asset('expense.jpg')}}" class="img-responsive" alt=""> --}}
     <div class="header">
         <div>
             <ul class="navbar-nav">
@@ -212,13 +213,12 @@
             
                             <li class="navigation-divider " aria-haspopup= "true"><a href="#" class="dropdown">Set-Up</a>
 							        <ul class="sub-menu">
+                                    <li><a href="{{url('/categorylist')}}">Category</a></li>
                                     <li><a href="{{ url('/companylist') }}">Company</a></li>
-									<li><a href="{{url('/categorylist')}}">Category</a></li>
-									<li><a href="{{url('/countrylist')}}">Country</a></li>
+                                    <li><a href="{{url('/unitlist')}}">Unit</a></li>
+                                    <li><a href="{{url('/countrylist')}}">Country</a></li>
                                     <li><a href="{{ url('/customerlist') }}">Customer</a></li>
-
-									<li><a href="{{url('/unitlist')}}">Unit</a></li>
-									<!--<li><a href="{{url('/divisionlist')}}">Division</a></li>-->
+                            	<!--<li><a href="{{url('/divisionlist')}}">Division</a></li>-->
 									<li><a href="{{url('/projectlist')}}">Project</a></li>
                                 </ul>
 							</li>

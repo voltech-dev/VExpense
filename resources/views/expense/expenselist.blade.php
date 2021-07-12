@@ -5,7 +5,7 @@
     <div class="container-fluid d-sm-flex justify-content-between">
         <h4>Expense List</h4>
         <div class="pull-right">
-            <a class="btn btn-success btn-square btn-sm" href="{{ url('expensecreate') }}"> New Expense</a>
+            <a class="btn btn-success btn-square btn-sm" href="{{ url('expensecreate') }}">Add New Expense</a>
         </div>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -18,6 +18,7 @@
     </div>
 </div>
 @endsection
+
 @section('content')
 <!-- end::page-header -->
 @if ($message = Session::get('success'))
@@ -41,7 +42,7 @@
                                     <th>Customer </th>
                                     <th>Project</th>
                                     <th>Expense Date</th>
-                                    <th>Expense Name </th>
+                                    <th>Expense  </th>
                                     <th>Expense Amount</th>
                                     <th>Action</th>
                             </tr>
@@ -65,13 +66,15 @@
                                  <td>
                                   
 														<form action="{{ url('delete-expense',$expense->id) }}" method="POST">
-                                                     <a class="btn btn-primary"
-                                                        href="{{ url('expenseedit',$expense->id) }}">Edit</a>
+                                                        <a class="btn btn-outline-primary"
+                                                        href="{{ url('expenseshow',$expense->id) }}"><small><i class="fas fa-eye"></i></small></a>
+                                                        <a class="btn btn-outline-primary"
+                                                        href="{{ url('expenseedit',$expense->id) }}"><small><i class="fas fa-edit"></i></small></a>
 													
 													@csrf
                                                     @method('DELETE')
                                                     <button type="submit" onclick="return confirm('Are you sure want to delete?')"
-													href=""	class="btn btn-danger">Delete</button>
+													href=""	class="btn btn-outline-danger"><small><i class="fas fa-trash"></i></small></button>
                                                 </form>
                                             </td>
                             </tr>

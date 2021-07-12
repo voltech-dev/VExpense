@@ -21,18 +21,18 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <div class="card bg-secondary-gradient">
+            {{-- <div class="card "> --}}
                 <div class="card-body">
                     <div class="row align-items-center">
                         <div class="col-md-12">
-                            <h6 class="card-title mb-3">Welcome
-                                {{{ isset(Auth::user()->name) ? Auth::user()->name : Auth::user()->email }}} !</h6>
+                            {{-- <h6 class="card-title mb-3">Welcome
+                                {{{ isset(Auth::user()->name) ? Auth::user()->name : Auth::user()->email }}} !</h6> --}}
 
                         </div>
 
                     </div>
                 </div>
-            </div>
+            {{-- </div> --}}
         </div>
     </div>
 

@@ -47,24 +47,24 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label col-form-label-sm">Company</label>
                             <div class="col-sm-3">
-							<select class="form-control-md" name="company_name" id="company_name">
+							<select class="form-control form-control-sm" name="company_name" id="company_name_id">
                                                     <option selected disable>---Select---</option>
-                                                     @foreach($company as $company)
-                                                    <option value="{{$company->id}}"
-													{{$company->id == $customer->company_id ?'selected' : ''}}>
-													{{$company->company_name}}</option>
+                                                     @foreach($company as $companys)
+                                                    <option value="{{$companys->id}}"
+													{{$companys->id == $customer->company_id ?'selected' : ''}}>
+													{{$companys->company_name}}</option>
                                                     @endforeach
                                                 </select>
                                
                             </div>
 							<label class="col-sm-3 col-form-label col-form-label-sm">Unit</label>
                                     <div class="col-sm-3">
-                                        <select class="form-control-md" name="unit_name" id="unit_name">
-                                                    <option selected disable>---Select---</option>
-                                                     @foreach($unit as $unit)
-                                                    <option value="{{$unit->id}}"
-													{{$unit->id == $customer->unit_id ?'selected' : ''}}>
-													{{$unit->unit_name}}</option>
+                                        <select class="form-control form-control-sm" name="unit_name" id="unit_name_id">
+                                                   <option selected disable>---Select---</option>
+                                                     @foreach($unit as $units)
+                                                    <option value="{{$units->id}}"
+													{{$units->id == $customer->unit_id ?'selected' : ''}}>
+													{{$units->unit_name}}</option>
                                                     @endforeach
                                                 </select>
                                     </div>
@@ -72,20 +72,20 @@
 						<div class="form-group row">
                             <label class="col-sm-3 col-form-label col-form-label-sm">Country</label>
                             <div class="col-sm-3">
-							<select class="form-control-md" name="country_name" id="country_name">
-                                                    <option selected disable>---Select---</option>
-                                                     @foreach($country as $country)
-                                                    <option value="{{$country->id}}"
-														{{$country->id == $customer->country_id ?'selected' : ''}}>
-														{{$country->country_name}}</option>
-                                                    @endforeach
+							<select class="form-control form-control-sm" name="country_name" id="country_name_id">
+                                                     <option selected disable>---Select---</option>
+                                                     @foreach($country as $countrys)
+                                                    <option value="{{$countrys->id}}"
+														{{$countrys->id == $customer->country_id ?'selected' : ''}}>
+														{{$countrys->country_name}}</option>
+                                                    @endforeach 
                                                 </select>
                                
                             </div>
 							<label class="col-sm-3 col-form-label col-form-label-sm">Customer Name</label>
                                     <div class="col-sm-3">
                                         <input type="text" class="form-control form-control-sm" name="customer_name"
-                                                id="customer_name" value="{{$customer->customer_name}}" placeholder="Enter Customer Name">
+                                                id="customer_name_id" autocomplete="off" value="{{$customer->customer_name}}" placeholder="Enter Customer Name">
                                     </div>
 						</div>
 						<div class="form-group row">
@@ -104,3 +104,50 @@
     </div>
 </div>
 @endsection
+{{-- This Ajax for interlinking  all the Set-up's --}}
+@push('scripts')
+<script type ="text/javascript">
+    $(document).ready(function(){
+               $('#company_name_id').change(function(event){
+        var company_name =$("#company_name_id").val();
+         //alert(company_name);
+
+       $.ajax({
+            url : "{{url('/companydisplay')}}",
+            type: 'GET',
+            data : {
+                company : company_name
+            },
+            //console.log(data);
+           // datatype : 'json',
+            success : function(data){
+              //  console.log(data);
+                $('#unit_name_id').html(data);      
+            },
+            error: function(exception){
+                alert('error');
+            }
+        });
+        });
+
+       $('#unit_name_id').change(function(event){
+            var unit_name = $('#unit_name_id').val();
+          // alert(unit_name);
+            $.ajax({
+                url : "{{url('/unitdisplay')}}",
+                type : 'GET',
+                data : { unit_name : unit_name},
+                success : function(data){
+                    $('#country_name_id').html(data);
+                },
+                error : function(exception){
+                    alert('error');
+                }
+            });
+       });
+     
+    });
+    
+</script>
+@endpush
+
