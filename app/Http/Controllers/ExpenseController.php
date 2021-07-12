@@ -70,7 +70,6 @@ class ExpenseController extends Controller
             'category_name.required' => '*Expense Name field cannot be empty.',
             'expense_amount.required' => '*Expense Amount field cannot be empty.',
         ]);
-      
 
         $expense_add = new Expense();
         $expense_add->company_id = $request->get('company_name');    
