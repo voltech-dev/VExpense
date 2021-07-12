@@ -107,7 +107,7 @@
 								<div class="form-group row">
                                     <label class="col-sm-3 col-form-label col-form-label-sm">Expense </label>
                                     <div class="col-sm-3">
-                                        <select class="form-control form-control-sm" name="category_name" id="category_name_id"  autofocus >
+                                        <select class="form-control form-control-sm" name="category_name[]" id="category_name_id" multiple autofocus >
                                                     <option selected disable>---Select---</option>
                                                      @foreach($category as $category)
                                                     <option value="{{$category->id}}">{{$category->category_name}}</option>
@@ -144,6 +144,7 @@
 @push('scripts')
 <script type ="text/javascript">
     $(document).ready(function(){
+       
         $('#company_name_id').change(function(event){
         var company_name =$("#company_name_id").val();
          //alert('hiiii');
@@ -215,7 +216,10 @@
               }
            });
        });
-      
+    
+    });
+    $(document).ready(function(){
+        $('#category_name_id').select2();
     });
   
 </script>

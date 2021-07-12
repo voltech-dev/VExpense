@@ -70,8 +70,11 @@ class ExpenseController extends Controller
             'category_name.required' => '*Expense Name field cannot be empty.',
             'expense_amount.required' => '*Expense Amount field cannot be empty.',
         ]);
-
+       
         $expense_add = new Expense();
+        // $var = $request->get('category_name');
+        
+        // $var1 = implode(',',$var);
         $expense_add->company_id = $request->get('company_name');    
         $expense_add->unit_id = $request->get('unit_name');
         $expense_add->country_id = $request->get('country_name');
@@ -79,6 +82,8 @@ class ExpenseController extends Controller
         $expense_add->project_id = $request->get('project_name');
         $expense_add->expense_date = $request->get('expense_date');
         $expense_add->category_id = $request->get('category_name');
+        //print_r( $expense_add->category_id);
+        //exit;
         $expense_add->expense_amount = $request->get('expense_amount');
         $expense_add->save();
         return redirect('expenselist');

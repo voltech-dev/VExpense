@@ -50,6 +50,7 @@
                         <tbody>
 						@php
 							$i=0;
+                            
 						@endphp
                             @foreach($expense_data as $expense)
                             <tr >
